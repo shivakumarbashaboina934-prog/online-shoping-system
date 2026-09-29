@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Checkout - ShopEasy{% endblock %}
+{% block content %}
+<div class="form-box wide">
+    <h1>Checkout</h1>
+    <p>Please confirm your order.</p>
+    {% for item, quantity, subtotal in items %}
+        <div class="checkout-row">
+            <span>{{ item.name }} × {{ quantity }}</span>
+            <strong>₹{{ "%.2f"|format(subtotal) }}</strong>
+        </div>
+    {% endfor %}
+    <hr>
+    <h2>Total: ₹{{ "%.2f"|format(total) }}</h2>
+    <form method="POST">
+        <button class="btn full" type="submit">Place Order</button>
+    </form>
+</div>
+{% endblock %}

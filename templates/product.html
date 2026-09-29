@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} - ShopEasy{% endblock %}
+{% block content %}
+<div class="detail">
+    <div class="big-image">{{ product.image }}</div>
+    <div>
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+        <h2 class="price">₹{{ "%.2f"|format(product.price) }}</h2>
+        <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+            <button class="btn" type="submit">Add to Cart</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

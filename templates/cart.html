@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Cart - ShopEasy{% endblock %}
+{% block content %}
+<h1>Shopping Cart</h1>
+{% if items %}
+<div class="cart-list">
+{% for item in items %}
+<div class="cart-item">
+    <div class="cart-icon">{{ item.product.image }}</div>
+    <div class="cart-info">
+        <h3>{{ item.product.name }}</h3>
+        <p>₹{{ "%.2f"|format(item.product.price) }} each</p>
+    </div>
+    <form method="POST" action="{{ url_for('update_cart', product_id=item.product.id) }}" class="quantity">
+        <input type="number" name="quantity" min="0" value="{{ item.quantity }}">
+        <button class="btn secondary" type="submit">Update</button>
+    </form>
+    <strong>₹{{ "%.2f"|format(item.subtotal) }}</strong>
+    <a class="remove" href="{{ url_for('remove_from_cart', product_id=item.product.id) }}">Remove</a>
+</div>
+{% endfor %}
+</div>
+<div class="summary">
+    <h2>Total: ₹{{ "%.2f"|format(total) }}</h2>
+    <a class="btn" href="{{ url_for('checkout') }}">Proceed to Checkout</a>
+</div>
+{% else %}
+<div class="empty">
+    <h2>Your cart is empty.</h2>
+    <a class="btn" href="{{ url_for('home') }}">Continue Shopping</a>
+</div>
+{% endif %}
+{% endblock %}

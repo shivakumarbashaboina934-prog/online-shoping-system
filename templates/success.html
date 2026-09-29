@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Order Successful - ShopEasy{% endblock %}
+{% block content %}
+<div class="success-box">
+    <div class="success-icon">✓</div>
+    <h1>Order Placed Successfully!</h1>
+    <p>Your order number is <strong>#{{ order_id }}</strong>.</p>
+    <p>Total amount: <strong>₹{{ "%.2f"|format(total) }}</strong></p>
+    <a class="btn" href="{{ url_for('orders') }}">View My Orders</a>
+    <a class="btn secondary" href="{{ url_for('home') }}">Continue Shopping</a>
+</div>
+{% endblock %}
